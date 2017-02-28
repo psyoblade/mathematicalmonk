@@ -5,11 +5,13 @@
     * 회귀식에 대한 노이즈를 확률변수로 보고, 데이터에 대하여 가우시안 선형회귀 모델링을 한다
     * 비용함수를 활용하여, 최대 우도 추정법을 통해 파라메터 추정을 수행한다
 2. 실험
+```python
     python linear_regression_one_var.py < linear_regression_one_var.txt
     Initial cost: 32.0727338775
     Initial weight: [0.0, 0.0]
     Final cost: 4.47697137598
     Final weight: [-3.895780820268237, 1.1930336383584828]
+```
 
 ## ML 9.1 Linear regression - nonlinearity via basis functions (기저함수를 통한 비선형성)
 1. 단순히 직선/평면의 방정식을 구하는 것보다 일반적인 개념이다
