@@ -6,7 +6,7 @@
     * 비용함수를 활용하여, 최대 우도 추정법을 통해 파라메터 추정을 수행한다
 2. 실험
 ```python
-    python linear_regression_one_var.py < linear_regression_one_var.txt
+python linear_regression_one_var.py < linear_regression_one_var.txt
     Initial cost: 32.0727338775
     Initial weight: [0.0, 0.0]
     Final cost: 4.47697137598
