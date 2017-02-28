@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+
 import sys
 
 
@@ -6,7 +9,7 @@ def y_hat(w, x):
 
 
 def cost(w, x, y, m):
-    _sum = sum([(h(w, x[i]) - y[i]) ** 2 for i in xrange(m)])
+    _sum = sum([(y_hat(w, x[i]) - y[i]) ** 2 for i in xrange(m)])
     return _sum / (2 * m)
 
 
