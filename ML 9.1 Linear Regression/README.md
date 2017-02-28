@@ -1,7 +1,16 @@
+## 선형회귀의 이해
+1. 요약
+    * 선형함수를 통한 회귀식을 구하는 방법에 대해 설명한다
+    * 선형회귀의 목적은 새로운 입력 데이터(x)에 대해서 출력(y)를 예측(predict)하는 것
+    * 데이터에 대한 모델링을 P(y|x)~N(y|wTx,sigma^2) 확률변수(random variable)로 본다
+    * 
+
 ## ML 9.1 Linear regression - nonlinearity via basis functions (기저함수를 통한 비선형성)
 1. 단순히 직선/평면의 방정식을 구하는 것보다 일반적인 개념이다
-    * 관관계 혹은 추세를 예측하기 위한 직선의 기울기를 구하는게 전부는 아니라 결과가 곡선이나 평면일 수도 있다는 의미
+    * 관계 혹은 추세를 예측하기 위한 직선의 기울기를 구하는게 전부는 아니라 결과가 곡선이나 평면일 수도 있다는 의미
     * [위키:선형회귀] (https://ko.wikipedia.org/wiki/선형_회귀)
+        * 왜 기저함수를 다른 함수도 아니고 f(x) = wTx 혹은 f(x) = wTpi(x) 인가?
+    * 선형회귀로 문제를 풀기로 했기 때문에, 선형방정식의 행렬 형태로 표현한 것이다
 1. 세상에는 정말 많은 기저함수가 존재하며, 그냥 가져다 쓰면 된다
     * Identity, General basis function Pi, Polinomial, Radial, Fourier, Wavelets
 1. 기저함수 자체는 선형성을 가지지 않아도 되며, 새로운 데이터 *x*에 대한 *y*를 예측하는 함수를 선택하는 것이 목적이다
@@ -30,23 +39,48 @@
 ## ML 9.2 Linear regression - Definition & Motivation (정의 & 동기)
 1. 기저함수를 통해 고차원 데이터x가 낮은 차원의 Feature Space 상에 존재할 수 있다
     * 일반적으로 ML 에서 특질/피쳐와 비슷한 의미로 보아도 될 것 같다
-1. 항등함수(Identity Functino)은 선형함수이다
+1. 항등함수(Identity Function)은 선형함수이다
     * identity fn: "f(x) = wTx" 절편이 없는 다항식이어도 선형
         * 절편을 가진 함수의 값들을 임의의 기저함수 Pi를 통해 원점으로 이동 후, 선형회귀 가능할 것이다
 1. 모델링 방식은 크게 판별/생성 모델 2가지가 있으며 여기서는 판별모델을 통해 설명한다
     * 판별모델 (Discriminative Model)
-        * 데이터 집합의 확률 P(y|x)을 통해 가중치 w vector를 학습하여 예측하는 모델
+        * 데이터 집합의 확률 P(y|x)을 통해 가중치 w vector를 학습하여 예측하는 모델으로의 접근
     * 생성모델 (Generative Model)
+        * 분포를 가정하고 그에 따른 파라메터 추론을 통해 모델링하는 접근하되, 파라메터도 고정되지 않은 랜덤변수로 본다.
 1. 선형회귀에서 데이터의 분포를 가정해서 모델링 해보려고 한다
     * 기저함수를 통해 데이터의 변환을 하기 위해 가장 만만한 Gaussian에 기반한 확률분포를 가정
+        * 왜 뜬금없이 분포를 가정하는가?
+    * 우리가 원하는 것은 p(y|x)인데, 새로운 dataset x에 대한 y값에 대한 확률 분포를 구하는 것이다
+    * 이때, 사전지식이 없기 때문에 확률분포를 가정하고 데이터 x를 통해 최적의 theta를 구할 것이다
         * 왜 mean 함수 대신 wTx 기저함수를 썼는가?
-    * 
+    * 우리는 주어진 환경에서 데이터를 모델링 하는 것이고, 이는 파라메터를 통해 데이터를 생성할 수도 있다는 말이다
+    * 이는 x, y 축을 기준으로 임의의 곡선을 모델링하고, 이에 따른 노이즈를 가우시안 분포로 가정한 것이라 보면 된다
+        * P(y|x) ~ N(y|wTx,sigma^2): 임의의 선형 기저함수를 통한 결과에 분산만큼의 노이즈가 있는 확률밀도 함수를 말한다
+    * 여기서 epsilon 이 random variable 이고 이에 따른 결과 Y 또한 random variable 이다
 
 
-(ML 9.3) Choosing f under linear regression
+## (ML 9.3) Choosing f under linear regression
+1. 앞서 정의한 기저함수에 대한 파라메터를 추정하기 위해 비용함수 L을 정의하고 구한다
+    * L(y, y`) = 1/2(y-y`)^2
+    * argmin~y E(L(y`,y)|X=x)
+    * 우도를 최대로 하려면 norm 값을 최소로 해야 하며, (y - Aw)T(y - Aw) 꼴으로 나온다
 
-(ML 9.4 ~ 9.6) MLE for linear regression
 
-(ML 9.7) Basis functions MLE
+## (ML 9.4 ~ 9.6) MLE for linear regression
+1. 행렬식의 극값(최대,최소) 판정을 위한 헤시안 행렬식(Hessian Determinant)
+    * 미분을 통해 극점(critical point)를 찾고 해당 지점의 헤시안 행렬의 모든 고유값(eigen value)가 양수이면 극소,
+    * 음수이면 극대, 음양 모두를 가지면 안장점(Saddle Point)을 가진다
+
+### 그레디언트(Gradient), 자코비안(Jacobian) 행렬, 헤시안(Hessian) 행렬, 라프라시안(Laplacian)
+1. 그레디언트, 자코비안, 헤시안, 라프라시안 필공
+    * [블로그:다크프로그래머 Gradient ...] (http://darkpgmr.tistory.com/132)
+
+### 슈도 인버스 (Pseudo inverse)
+1. 정방행렬로 만들어 억지로 역행렬을 곱하는 방법
+    * 정방행렬이 아닌 경우 역행렬을 구할 수 없는데 이에 aTa 형식의 경우 매트릭스를 축소하는 방향으로 정방행렬로 만든다
+    * 양변에 (aTa)의 역행렬을 취함으로써 원하는 파라메터 추정에 대한 식을 구할 수 있다
+
+
+## (ML 9.7) Basis functions MLE
 
 
