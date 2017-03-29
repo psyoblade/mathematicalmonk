@@ -6,4 +6,4 @@ mathematical monk youtube lecture study page
 
 
 ## [ML 9 Linear Regression] (https://github.com/psyoblade/mathematicalmonk/tree/master/ML%209%20Linear%20Regression)
-## [ML10 Bayesian Linear Regression] (#)
+## [ML10 Bayesian Linear Regression] (https://github.com/psyoblade/mathematicalmonk/tree/master/ML10%20Bayesian%20Linear%20Regression)

@@ -1,7 +1,7 @@
 ## 추정량의 이해
 1. 요약
     * 추정량 및 그 성질 및 관련용어에 대한 이해
-    * 
+    * 추정을 위한 2가지 접근법 (베이지언 vs. 빈도론)
 
 
 ## ML1. Estimators (추정량)
@@ -64,5 +64,41 @@
         * Risk world 를 통해서 averaging over data 를 구할 수 있었다
     * 이 두 가지 접근법을 "베이즈 리스크" 정도의 용어로 말할 수 있을 것이다
         * 필요에 따라 어느 쪽을 선택하여 "베이즈 리스크"를 통해 예측을 하는 것이다
+
+
+## ML 11.4. Choosing a decision rule - Bayesian and frequentist
+1. 개요
+    * 베이지언과 빈도론자 입장에서의 결정규칙을 선택하는 방법
+1. 베이지언 관점
+    * Case #1. 데이터를 알고 있을때, 베이지언 추정 비용을 최소화 하기 위한 함수 f(D)를 선택
+    * Case #2. a.k.a Conditional Bayes: 데이터를 모를 때, "Bayes Risk"를 최소화 하기 위한 함수 f를 선택하는 것
+        * average over D - minimizing expected loss under those average over D and Pi
+        * 여기서 베이지언 접근임에도 불구하고, 데이터를 모르는 경우 베이즈 함수를 최소화 하도록 선택해야 한다
+1. 빈도주의 관점
+    * 선택을 위한 원칙을 가이드해야 한다
+        * Unbiaseness
+        * Admissibility: 위험 함수간에 전체 theta 데이터의 모든 구간에서 위험함수의 결과가 나은 경우에 위험이 큰 것을 선택할 이유가 없는 것
+        * Minimax
+        * Invariance
+
+
+## ML 11.5. Bias-Variance decomposition
+1. 개요
+    * MSE(mean square error) = bias^2 + var
+    * 증명을 통해서 평균 제곱 오류는 bias 제곱과 variance 합으로 분해될 수 있다
+
+
+## ML 11.6 ~ 7. Inadmissibility
+1. 개요
+    * 적절하지 않은 추정량을 제외하는 방법 (reject certain estimators)
+    * 이상적인 상황(var=1)과 특수한 상황(var=0)을 비교하여 허용성(admissibility)를 설명할 수 있다
+        * delta 를 dominate 하는 또 다른 decision rule delta 가 존재한다면, 결정규칙 delta 는 inadmissible 하다 즉, 허용할 수 없다고 말한다
+            * 그렇지 않으면 (일부만 inadmissible 한 경우 포함) 모두 admissible 한다 즉, 허용가능하다
+
+
+## ML 11.8 Bayesian decision theory
+1. 개요
+    * 
+
 
 
